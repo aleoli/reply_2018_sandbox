@@ -15,8 +15,8 @@ Reader::Reader(string file) {
     f >> this->start.x >> this->start.y >> this->end.x >> this->end.y;
     this->check_border(this->start);
     this->check_border(this->end);
-    int n_obst;
-    f >> n_obst;
+    int n_obst = 5;
+    //f >> n_obst;
     //cout << "Creating " << n_obst << " obstacles" << endl;
     while(n_obst > 0) {
         Point a;
@@ -24,6 +24,9 @@ Reader::Reader(string file) {
         Point c;
         if(!(f >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y)) {
             break;
+        }
+        if(!this->check_limits(a) || !this->check_limits(b) || !this->check_limits(c)) {
+            continue;
         }
         this->check_border(a);
         this->check_border(b);
@@ -49,15 +52,15 @@ vector<Node *> Reader::get_nodes() const {
     //cout << "y: " << this->min_y << " <-> " << this->max_y << endl;
     //cout << "Creating " << (this->max_x-this->min_x)*(this->max_y-this->min_y) << " nodes" << endl;
     vector<Node *> res;
-    int id=0;
+    unsigned long id=0;
     for(long a=this->min_y; a<=this->max_y; a++) {
         for(long b=this->min_x; b<=this->max_x; b++) {
             Point p;
             p.y = a;
             p.x = b;
             res.push_back(new Node(id, 1, p));
+            id++;
         }
-        id++;
     }
     return res;
 }
@@ -67,7 +70,7 @@ vector<Link> Reader::get_links() const {
     //cout << "y: " << this->min_y << " <-> " << this->max_y << endl;
     //cout << "Creating " << (this->max_x-this->min_x)*(this->max_y-this->min_y)*2 << " links" << endl;
     vector<Link> res;
-    int id=0;
+    unsigned long id=0;
     long rows = this->max_y - this->min_y;
     for(long a=this->min_y; a<=this->max_y; a++) {
         for(long b=this->min_x; b<=this->max_x; b++) {
@@ -87,6 +90,7 @@ vector<Link> Reader::get_links() const {
                 if(l.from >= 0 && l.to >= 0)
                     res.push_back(l);
             }
+            id++;
         }
     }
     return res;
@@ -117,4 +121,8 @@ void Reader::check_border(Point a) {
     if(a.y > this->max_y) {
         this->max_y = a.y;
     }
+}
+
+bool Reader::check_limits(Point a) {
+    return a.x >= -500 && a.x <= 2000 && a.y >= -500 && a.y <= 2000;
 }

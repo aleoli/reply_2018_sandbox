@@ -22,6 +22,7 @@ namespace reply {
         
     private:
         void check_border(Point a);
+        bool check_limits(Point a);
         
         Point start;
         Point end;

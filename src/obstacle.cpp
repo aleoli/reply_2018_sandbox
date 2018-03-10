@@ -26,6 +26,7 @@ void Obstacle::occ_points(Graph *g) {
     
     for(float a=this->min_y; a<=this->max_y; a+=1) {
         for(float b=this->min_x; b<=this->max_x; b+=1) {
+            //cout << this->min_x << " " << this->max_x << " " << a << " " << b << endl;
             if(this->is_inside(a, b)) {
                 try {
                     Node *n = g->getNode(a, b);

@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     n.join();
     l.join();
     
-    cout << "Creating graph" << endl;
+    cout << "Creating graph with " << nodes.size() << " nodes and " << links.size() << " links" << endl;
     Graph g(nodes, links);
     
     cout << "Computing obstacles" << endl;
@@ -88,7 +88,6 @@ void load_obstacles(Graph *g, vector<Obstacle *> obstacles, int n, unsigned long
         if(count%4 != n) {
             continue;
         }
-        cout << count << endl;
         try {
             (*it)->occ_points(g);
         } catch(A_star_exception &e) {
