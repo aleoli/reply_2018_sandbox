@@ -12,6 +12,7 @@ namespace reply {
         ~Obstacle();
         
         void occ_points(Graph *g);
+        string to_string() const;
         
     private:
         void check_border(Point a);

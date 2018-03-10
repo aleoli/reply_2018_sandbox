@@ -8,7 +8,7 @@ CC = g++
 PROGRAM_NAME = reply_sandbox
 
 build: $(OBJECTS)
-	$(CC) -Wall -std=c++11 $(CPPFLAGS) -o bin/$(PROGRAM_NAME) $(OBJECTS) $(LDLIBS)
+	$(CC) -Wall -std=c++11 $(CPPFLAGS) -o bin/$(PROGRAM_NAME) $(OBJECTS) $(LDLIBS) -pthread
 
 bin/%.o: src/%.cpp
 	$(CC) -Wall -std=c++11 $(CPPFLAGS) -c -o bin/$*.o src/$*.cpp $(LDLIBS)

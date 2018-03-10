@@ -12,12 +12,9 @@ Reader::Reader(string file) {
     
     ifstream f(file);
     
-    Point start;
-    Point end;
-    
-    f >> start.x >> start.y >> end.x >> end.y;
-    this->check_border(start);
-    this->check_border(end);
+    f >> this->start.x >> this->start.y >> this->end.x >> this->end.y;
+    this->check_border(this->start);
+    this->check_border(this->end);
     int n_obst;
     f >> n_obst;
     //cout << "Creating " << n_obst << " obstacles" << endl;
@@ -36,6 +33,9 @@ Reader::Reader(string file) {
     }
     
     f.close();
+    
+    cout << "x: " << this->min_x << " <-> " << this->max_x << endl;
+    cout << "y: " << this->min_y << " <-> " << this->max_y << endl;
 }
 
 Reader::~Reader() {
@@ -76,14 +76,16 @@ vector<Link> Reader::get_links() const {
                 l.from = id;
                 l.to = id-rows;
                 l.weight = 1;
-                res.push_back(l);
+                if(l.from >= 0 && l.to >= 0)
+                    res.push_back(l);
             }
             if(b>0) {
                 Link l;
                 l.from = id;
                 l.to = id-1;
                 l.weight = 1;
-                res.push_back(l);
+                if(l.from >= 0 && l.to >= 0)
+                    res.push_back(l);
             }
         }
     }
@@ -92,6 +94,14 @@ vector<Link> Reader::get_links() const {
 
 vector<Obstacle *> Reader::get_obstacles() const {
     return this->obstacles;
+}
+
+Point Reader::get_start() const {
+    return this->start;
+}
+
+Point Reader::get_end() const {
+    return this->end;
 }
 
 void Reader::check_border(Point a) {
