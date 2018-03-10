@@ -1,0 +1,6 @@
+[submodule "reply_2018_sandbox"]
+	path = reply_2018_sandbox
+	url = git@github.com:aleoli/reply_2018_sandbox.git
+[submodule "a_star"]
+	path = a_star
+	url = git@github.com:aleoli/a_star.git
