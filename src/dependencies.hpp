@@ -18,6 +18,7 @@ namespace reply {
     
     class Reader;
     class Obstacle;
+    class Writer;
     
 }
 

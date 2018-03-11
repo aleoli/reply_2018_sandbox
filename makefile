@@ -1,4 +1,4 @@
-OBJECTS = bin/main.o bin/a_star.o bin/a_star_dependencies.o bin/node.o bin/graph.o bin/a_star_exception.o bin/path.o bin/dependencies.o bin/reply.o bin/reader.o bin/obstacle.o
+OBJECTS = bin/main.o bin/a_star.o bin/a_star_dependencies.o bin/node.o bin/graph.o bin/a_star_exception.o bin/path.o bin/dependencies.o bin/reply.o bin/reader.o bin/obstacle.o bin/writer.o
 
 CPPFLAGS = 
 LDLIBS = 

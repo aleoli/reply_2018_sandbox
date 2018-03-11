@@ -14,13 +14,14 @@ namespace reply {
         Reader(string file);
         ~Reader();
         
-        vector<Node *> get_nodes() const;
-        vector<Link> get_links() const;
+        void get_nodes(Graph *g) const;
+        void get_links(Graph *g) const;
         vector<Obstacle *> get_obstacles() const;
         Point get_start() const;
         Point get_end() const;
         
     private:
+        void compute_limits();
         void check_border(Point a);
         bool check_limits(Point a);
         
@@ -28,6 +29,7 @@ namespace reply {
         Point end;
         vector<Obstacle *> obstacles;
         long min_x, min_y, max_x, max_y;
+        long l_min_x, l_min_y, l_max_x, l_max_y;
         
     };
     
